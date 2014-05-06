@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<models>
+    <model name="TaxonomyVocabulary" modelClass="ride\application\orm\model\TaxonomyVocabularyModel" dataClass="ride\application\orm\model\TaxonomyVocabulary">
+        <field name="name" type="string">
+            <validation name="required" />
+
+            <option name="label" value="label.name" />
+            <option name="scaffold.order" value="1" />
+            <option name="scaffold.search" value="1" />
+        </field>
+        <field name="slug" type="string" unique="true">
+            <validation name="required" />
+
+            <option name="label" value="label.slug" />
+            <option name="scaffold.form.control" value="label" />
+        </field>
+
+        <format name="title">{name}</format>
+        <format name="description">{slug}</format>
+
+        <option name="behaviour.slug.field" value="name" />
+        <option name="data.list.recursive.depth" value="0" />
+        <option name="data.list.order.field" value="name" />
+        <option name="rest.expose" value="true" />
+    </model>
+    <model name="TaxonomyTerm" modelClass="ride\application\orm\model\TaxonomyTermModel" dataClass="ride\application\orm\model\TaxonomyTerm">
+        <field name="name" type="string">
+            <validation name="required" />
+
+            <option name="label" value="label.name" />
+            <option name="scaffold.order" value="1" />
+            <option name="scaffold.search" value="1" />
+        </field>
+        <field name="vocabulary" model="TaxonomyVocabulary" relation="belongsTo">
+            <option name="label" value="label.vocabulary" />
+            <option name="scaffold.search" value="1" />
+        </field>
+        <field name="parent" model="TaxonomyTerm" relation="belongsTo">
+            <option name="label" value="label.parent" />
+        </field>
+        <field name="description" type="string">
+            <option name="label" value="label.description" />
+            <option name="scaffold.search" value="1" />
+        </field>
+        <field name="weight" type="integer">
+            <option name="label" value="label.weight" />
+            <option name="scaffold.order" value="1" />
+        </field>
+        <field name="slug" type="string" unique="true">
+            <validation name="required" />
+
+            <option name="label" value="label.slug" />
+            <option name="scaffold.form.control" value="label" />
+        </field>
+
+        <format name="title">{name}</format>
+        <format name="teaser">{5description}</format>
+
+        <option name="behaviour.slug.field" value="name" />
+        <option name="data.list.recursive.depth" value="0" />
+        <option name="data.list.order.field" value="name" />
+        <option name="rest.expose" value="true" />
+    </model>
+</models>

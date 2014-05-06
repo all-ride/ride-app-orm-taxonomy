@@ -1,0 +1,20 @@
+{
+    "name": "ride/app-orm-taxonomy",
+    "description": "Taxonomy model for the Ride ORM.",
+    "version": "0.1.0",
+    "authors": [
+        {
+            "name": "Joris Vandeweerd",
+            "email": "joris@statik.be"
+        }
+    ],
+    "require": {
+        "ride/app-orm": "*",
+        "ride/lib-orm": "*"
+    },
+    "autoload": {
+        "psr-0": {
+            "ride\\application\\orm\\model\\": ["src/"]
+        }
+    }
+}
