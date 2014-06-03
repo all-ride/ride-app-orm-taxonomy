@@ -2,43 +2,19 @@
 
 namespace ride\application\orm\model;
 
-use ride\library\orm\model\data\Data;
+use ride\application\orm\entry\TaxonomyTermEntry;
 
 /**
  * Data container for a term entry
  */
-class TaxonomyTerm extends Data {
-
-    /**
-     * Vocabulary of the term
-     * @var null|integer|TaxonomyVocabulary
-     */
-    public $vocabulary;
-
-    /**
-     * Parent term
-     * @var null|integer|TaxonomyTerm
-     */
-    public $parent;
-
-    /**
-     * Name of the term
-     * @var string
-     */
-    public $name;
-
-    /**
-     * Index for a cloud
-     * @var integer
-     */
-    public $weight;
+class TaxonomyTerm extends TaxonomyTermEntry {
 
     /**
      * Gets a string representation of this term
      * @return string
      */
     public function __toString() {
-        return $this->name;
+        return $this->getName();
     }
 
 }
