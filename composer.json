@@ -1,7 +1,7 @@
 {
     "name": "ride/app-orm-taxonomy",
     "description": "Taxonomy model for the Ride ORM.",
-    "version": "0.2.0",
+    "version": "0.3.0",
     "authors": [
         {
             "name": "Joris Vandeweerd",
