@@ -21,12 +21,11 @@ class TaxonomyTermModel extends GenericModel {
      */
     public function getByName($name, $vocabulary = null, $parent = null) {
         $query = $this->createQuery();
-        $query->setRecursiveDepth(0);
         $query->addCondition('{name} = %1%', $name);
 
         if ($vocabulary) {
             if (is_object($vocabulary)) {
-                $query->addCondition('{vocabulary} = %1%', $vocabulary->id);
+                $query->addCondition('{vocabulary} = %1%', $vocabulary->getId());
             } elseif (is_numeric($vocabulary)) {
                 $query->addCondition('{vocabulary} = %1%', $vocabulary);
             } else {
@@ -36,7 +35,7 @@ class TaxonomyTermModel extends GenericModel {
 
         if ($parent) {
             if (is_object($parent)) {
-                $query->addCondition('{parent} = %1%', $parent->id);
+                $query->addCondition('{parent} = %1%', $parent->getId());
             } elseif (is_numeric($vocabulary)) {
                 $query->addCondition('{parent} = %1%', $parent);
             } else {
@@ -46,34 +45,32 @@ class TaxonomyTermModel extends GenericModel {
 
         $term = $query->queryFirst();
         if (!$term) {
-            $term = $this->createData();
-            $term->name = $name;
+            $term = $this->createEntry();
+            $term->setName($name);
 
             if ($vocabulary) {
-                if (is_object($vocabulary)) {
-                    $vocabulary = $vocabulary->id;
-                } elseif (!is_numeric($vocabulary)) {
+                if (!is_object($vocabulary)) {
                     $vocabularyModel = $this->orm->getTaxonomyVocabularyModel();
-                    $vocabulary = $vocabularyModel->getBy('slug', $vocabulary, 0);
-                    if ($vocabulary) {
-                        $vocabulary = $vocabulary->id;
+                    if (is_numeric($vocabulary)) {
+                        $vocabulary = $vocabularyModel->createProxy($vocabulary);
+                    } else {
+                        $vocabulary = $vocabularyModel->getBy('slug', $vocabulary);
                     }
                 }
 
-                $term->vocabulary = $vocabulary;
+                $term->setVocabulary($vocabulary);
             }
 
             if ($parent) {
-                if (is_object($parent)) {
-                    $parent = $parent->id;
-                } elseif (!is_numeric($parent)) {
-                    $parent = $this->getBy('slug', $parent, 0);
-                    if ($parent) {
-                        $parent = $parent->id;
+                if (!is_object($parent)) {
+                    if (is_numeric($parent)) {
+                        $parent = $this->createProxy($parent);
+                    } else {
+                        $parent = $this->getBy('slug', $parent);
                     }
                 }
 
-                $term->parent = $parent;
+                $term->setParent($parent);
             }
         }
 
@@ -87,11 +84,11 @@ class TaxonomyTermModel extends GenericModel {
      */
     public function calculateCloud(array $terms) {
         foreach ($terms as $term) {
-            if (!$this->isValidData($term)) {
+            if (!$this->isValidEntry($term)) {
                 throw new OrmException('Could not generate cloud: invalid term provided');
             }
 
-            $term->weight = $this->calculateCloudWeight($term);
+            $term->setWeight($this->calculateCloudWeight($term));
         }
 
         return $terms;
@@ -109,7 +106,7 @@ class TaxonomyTermModel extends GenericModel {
         foreach ($models as $modelName) {
             $model = $this->orm->getModel($modelName);
             $modelMeta = $model->getMeta();
-            $modelWeight = $modelMeta->getOption('taxonomy.weight', 1);
+            $modelWeight = $modelMeta->getOption('taxonomy.cloud.weight', 1);
 
             if ($modelMeta->hasField('taxonomyTerm')) {
                 $query = $model->createQuery();

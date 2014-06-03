@@ -1,66 +1,66 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <models>
-    <model name="TaxonomyVocabulary" modelClass="ride\application\orm\model\TaxonomyVocabularyModel" dataClass="ride\application\orm\model\TaxonomyVocabulary">
+    <model name="TaxonomyVocabulary" modelClass="ride\application\orm\model\TaxonomyVocabularyModel" entryClass="ride\application\orm\model\TaxonomyVocabulary">
         <field name="name" type="string">
             <validation name="required" />
 
-            <option name="label" value="label.name" />
+            <option name="label.name" value="label.name" />
             <option name="scaffold.order" value="1" />
             <option name="scaffold.search" value="1" />
         </field>
         <field name="slug" type="string" unique="true">
             <validation name="required" />
 
-            <option name="label" value="label.slug" />
-            <option name="scaffold.form.control" value="label" />
+            <option name="label.name" value="label.slug" />
+            <option name="scaffold.form.type" value="label" />
         </field>
 
         <format name="title">{name}</format>
         <format name="description">{slug}</format>
 
-        <option name="behaviour.slug.field" value="name" />
+        <option name="behaviour.slug" value="name" />
         <option name="data.list.recursive.depth" value="0" />
         <option name="data.list.order.field" value="name" />
         <option name="rest.expose" value="true" />
     </model>
-    <model name="TaxonomyTerm" modelClass="ride\application\orm\model\TaxonomyTermModel" dataClass="ride\application\orm\model\TaxonomyTerm">
+    <model name="TaxonomyTerm" modelClass="ride\application\orm\model\TaxonomyTermModel" entryClass="ride\application\orm\model\TaxonomyTerm">
         <field name="name" type="string" localized="true">
             <validation name="required" />
 
-            <option name="label" value="label.name" />
+            <option name="label.name" value="label.name" />
             <option name="scaffold.order" value="1" />
             <option name="scaffold.search" value="1" />
         </field>
         <field name="vocabulary" model="TaxonomyVocabulary" relation="belongsTo">
-            <option name="label" value="label.vocabulary" />
+            <option name="label.name" value="label.vocabulary" />
             <option name="scaffold.search" value="1" />
         </field>
         <field name="parent" model="TaxonomyTerm" relation="belongsTo">
-            <option name="label" value="label.parent" />
+            <option name="label.name" value="label.parent" />
         </field>
         <field name="description" type="string" localized="true">
-            <option name="label" value="label.description" />
+            <option name="label.name" value="label.description" />
             <option name="scaffold.search" value="1" />
         </field>
         <field name="image" type="image">
-            <option name="label" value="label.image" />
+            <option name="label.name" value="label.image" />
         </field>
         <field name="weight" type="integer">
-            <option name="label" value="label.weight" />
+            <option name="label.name" value="label.weight" />
             <option name="scaffold.order" value="1" />
         </field>
         <field name="slug" type="string" localized="true" unique="true">
             <validation name="required" />
 
-            <option name="label" value="label.slug" />
-            <option name="scaffold.form.control" value="label" />
+            <option name="label.name" value="label.slug" />
+            <option name="scaffold.form.type" value="label" />
         </field>
 
         <format name="title">{name}</format>
         <format name="teaser">{description}</format>
         <format name="image">{image}</format>
 
-        <option name="behaviour.slug.field" value="name" />
+        <option name="behaviour.slug" value="slug" />
         <option name="data.list.recursive.depth" value="0" />
         <option name="data.list.order.field" value="name" />
         <option name="rest.expose" value="true" />
