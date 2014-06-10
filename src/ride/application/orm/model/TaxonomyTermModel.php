@@ -54,7 +54,7 @@ class TaxonomyTermModel extends GenericModel {
                     if (is_numeric($vocabulary)) {
                         $vocabulary = $vocabularyModel->createProxy($vocabulary);
                     } else {
-                        $vocabulary = $vocabularyModel->getBy('slug', $vocabulary);
+                        $vocabulary = $vocabularyModel->getBy(array('filter' => array('slug' => $vocabulary)));
                     }
                 }
 
@@ -66,7 +66,7 @@ class TaxonomyTermModel extends GenericModel {
                     if (is_numeric($parent)) {
                         $parent = $this->createProxy($parent);
                     } else {
-                        $parent = $this->getBy('slug', $parent);
+                        $parent = $this->getBy(array('filter' => array('slug' => $parent)));
                     }
                 }
 
