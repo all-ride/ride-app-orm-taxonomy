@@ -60,7 +60,7 @@
         <format name="teaser">{description}</format>
         <format name="image">{image}</format>
 
-        <option name="behaviour.slug" value="slug" />
+        <option name="behaviour.slug" value="name" />
         <option name="data.list.recursive.depth" value="0" />
         <option name="data.list.order.field" value="name" />
         <option name="rest.expose" value="true" />
