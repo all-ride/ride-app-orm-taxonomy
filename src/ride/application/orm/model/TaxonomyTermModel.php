@@ -127,4 +127,35 @@ class TaxonomyTermModel extends GenericModel {
         return $weight;
     }
 
+
+    public function getTaxonomyTree($locale = null, $parent = null, $prefix = null) {
+        $tree = array();
+
+        $terms = $this->getTaxonomyForParent($locale, $parent);
+        foreach ($terms as $term) {
+            $name = $prefix . '/' . $term->getName();
+
+            $tree[$term->getId()] = $name;
+
+            $tree = $this->getTaxonomyTree($locale, $term->getId(), $name) + $tree;
+        }
+        asort($tree);
+        return $tree;
+    }
+
+    public function getTaxonomyForParent($locale = null, $parent = null) {
+        $query = $this->createQuery($locale);
+        $query->setFetchUnlocalized(true);
+
+        if ($parent === null) {
+            $query->addCondition('{parent} IS NULL');
+        } else {
+            $query->addCondition('{parent} = %1%', $parent);
+        }
+
+        $query->addOrderBy('{name} ASC');
+
+        return $query->query();
+    }
+
 }
