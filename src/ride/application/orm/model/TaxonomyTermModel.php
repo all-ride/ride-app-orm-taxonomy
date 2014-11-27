@@ -147,7 +147,7 @@ class TaxonomyTermModel extends GenericModel {
         foreach ($terms as $term) {
             $name = $prefix . '/' . $term->getName();
 
-            $tree[$term->getId()] = $name . ' (' . $term->getWeight() . ')';
+            $tree[$term->getId()] = $name;
 
             $tree += $this->getTaxonomyTree($vocabulary, $term, $locale, $orderField, $name);
         }
