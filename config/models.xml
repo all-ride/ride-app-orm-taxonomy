@@ -23,13 +23,6 @@
         <option name="rest.expose" value="true" />
     </model>
     <model name="TaxonomyTerm" modelClass="ride\application\orm\model\TaxonomyTermModel" entryClass="ride\application\orm\model\TaxonomyTerm">
-        <field name="name" type="string" localized="true">
-            <validation name="required" />
-
-            <option name="label.name" value="label.name" />
-            <option name="scaffold.order" value="1" />
-            <option name="scaffold.search" value="1" />
-        </field>
         <field name="vocabulary" model="TaxonomyVocabulary" relation="belongsTo">
             <option name="label.name" value="label.vocabulary" />
             <option name="scaffold.search" value="1" />
@@ -37,7 +30,14 @@
         <field name="parent" model="TaxonomyTerm" relation="belongsTo">
             <option name="label.name" value="label.parent" />
         </field>
-        <field name="description" type="string" localized="true">
+        <field name="name" type="string" localized="true">
+            <validation name="required" />
+
+            <option name="label.name" value="label.name" />
+            <option name="scaffold.order" value="1" />
+            <option name="scaffold.search" value="1" />
+        </field>
+        <field name="description" type="text" localized="true">
             <option name="label.name" value="label.description" />
             <option name="scaffold.search" value="1" />
         </field>
