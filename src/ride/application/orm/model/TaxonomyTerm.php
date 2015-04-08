@@ -14,7 +14,12 @@ class TaxonomyTerm extends TaxonomyTermEntry {
      * @return string
      */
     public function __toString() {
-        return $this->getName();
+        $name = $this->getName();
+        if ($name) {
+            return $name;
+        }
+
+        return parent::__toString();
     }
 
 }
