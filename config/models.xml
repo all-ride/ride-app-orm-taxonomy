@@ -19,8 +19,8 @@
         <format name="description">{slug}</format>
 
         <option name="behaviour.slug" value="name" />
+        <option name="json.api" value="taxonomy-vocabularies"/>
         <option name="order.field" value="name" />
-        <option name="rest.expose" value="true" />
     </model>
     <model name="TaxonomyTerm" modelClass="ride\application\orm\model\TaxonomyTermModel" entryClass="ride\application\orm\model\TaxonomyTerm">
         <field name="vocabulary" model="TaxonomyVocabulary" relation="belongsTo">
@@ -60,7 +60,7 @@
         <format name="image">{image}</format>
 
         <option name="behaviour.slug" value="name" />
+        <option name="json.api" value="taxonomy-terms"/>
         <option name="order.field" value="weight" />
-        <option name="rest.expose" value="true" />
     </model>
 </models>
