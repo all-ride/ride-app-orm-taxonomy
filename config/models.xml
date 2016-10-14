@@ -49,7 +49,7 @@
             <option name="label.name" value="label.weight" />
             <option name="scaffold.order" value="1" />
         </field>
-        <field name="slug" type="string" localized="true" unique="true">
+        <field name="slug" type="string" localized="true">
             <validation name="required" />
 
             <option name="label.name" value="label.slug" />
