@@ -19,6 +19,7 @@
         <format name="description">{slug}</format>
 
         <option name="behaviour.slug" value="name" />
+        <option name="group" value="taxonomy"/>
         <option name="json.api" value="taxonomy-vocabularies"/>
         <option name="order.field" value="name" />
     </model>
@@ -60,6 +61,7 @@
         <format name="image">{image}</format>
 
         <option name="behaviour.slug" value="name" />
+        <option name="group" value="taxonomy"/>
         <option name="json.api" value="taxonomy-terms"/>
         <option name="order.field" value="weight" />
     </model>

@@ -1,7 +1,7 @@
 {
     "name": "ride/app-orm-taxonomy",
     "description": "Taxonomy model for the Ride ORM.",
-    "version": "0.4.5",
+    "license": "MIT",
     "authors": [
         {
             "name": "Joris Vandeweerd",
@@ -9,8 +9,9 @@
         }
     ],
     "require": {
-        "ride/app-orm": ">=0.2.0",
-        "ride/lib-orm": ">=0.3.0"
+        "ride/app": "^1.0.0",
+        "ride/app-orm": "^1.0.0",
+        "ride/lib-orm": "^1.0.0"
     },
     "autoload": {
         "psr-0": {
